@@ -8,16 +8,7 @@ public class Line : MonoBehaviour
     [SerializeField] private EdgeCollider2D _collider;
 
     private List<Vector2> _points = new List<Vector2>();
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void SetPosition(Vector2 pos) { 
         if (!CanAppend(pos)) return;
 
@@ -26,13 +17,13 @@ public class Line : MonoBehaviour
         _renderer.positionCount++;
         _renderer.SetPosition(_renderer.positionCount - 1, pos);
 
-        _collider.points = _points.ToArray();
+        _collider.points = _points.ToArray(); 
     }
 
     private bool CanAppend(Vector2 pos)
     {
-        if (_renderer.positionCount == 0) return true;
+        if (_renderer.positionCount == 0) return true; //always true for first point
 
-        return Vector2.Distance(_renderer.GetPosition(_renderer.positionCount - 1), pos) > DrawManager.RESOLUTION;
+        return Vector2.Distance(_renderer.GetPosition(_renderer.positionCount - 1), pos) > DrawManager.RESOLUTION; //checks distance between last point
     }
 }
