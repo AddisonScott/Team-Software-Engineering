@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
@@ -9,12 +10,14 @@ public class PlayerMovement : MonoBehaviour
     public float jumpMultiplier = 2.5f;
     public float jumpCounter;
     public float jumpTime;
+    public float flipDuration;
     public Transform groundCheck;
     
 
     private Rigidbody2D rb;
-    
 
+    bool facingRight;
+    bool isTurning;
     bool isJumping;
     bool isGrounded;
     Vector2 vecGravity;
@@ -33,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+       
         // Check if the player is touching the ground
         isGrounded = Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.5f, 0.1f), CapsuleDirection2D.Horizontal, 0f, LayerMask.GetMask("Ground"));
 
@@ -61,6 +65,30 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity += vecGravity * currentJumpM * Time.deltaTime;
         }
 
+        // Flip the player sprite
+        if (isTurning)
+        {
+            StartCoroutine(FlipPlayer());
+        }
+
+    }
+
+    private IEnumerator FlipPlayer()
+    {;
+        float elapsed = 0f;
+        print("Flipping");
+        Quaternion startRotation = transform.rotation;
+        Quaternion endRotation = Quaternion.Euler(0f, facingRight ? 180f : 0f, 0f); 
+
+        while (elapsed < flipDuration)
+        {
+            transform.rotation = Quaternion.Slerp(startRotation, endRotation, elapsed / flipDuration); // Smoothly interpolate between the start and end rotation
+            elapsed += Time.deltaTime; 
+            yield return null; // Each frame
+        }
+
+        transform.rotation = endRotation;
+        isTurning = false;
     }
 
     private void FixedUpdate()
@@ -101,10 +129,20 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed)
         {
+            isTurning = true;
             moveDirection = context.ReadValue<Vector2>();
+            if (moveDirection.x > 0)
+            {
+                facingRight = false;
+            }
+            else
+            {
+                facingRight = true;
+            }
         }
         else if (context.canceled)
         {
+            isTurning = false;
             moveDirection = Vector2.zero;
         }
     }
