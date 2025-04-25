@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-       
+        // Jumping
         // Check if the player is touching the ground
         isGrounded = Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.5f, 0.1f), CapsuleDirection2D.Horizontal, 0f, LayerMask.GetMask("Ground"));
 
