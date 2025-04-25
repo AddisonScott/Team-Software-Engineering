@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
+
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
     public float fallMultiplier = 2.5f;
@@ -12,19 +13,21 @@ public class PlayerMovement : MonoBehaviour
     public float jumpTime;
     public float flipDuration;
     public Transform groundCheck;
-    
+    public ParticleSystem[] dustSystem;
 
     private Rigidbody2D rb;
 
+    bool wasMoving = false; // To check if the player is moving or not
     bool facingRight;
+    bool isMoving;
     bool isTurning;
     bool isJumping;
     bool isGrounded;
-    Vector2 vecGravity;
 
+    Vector2 vecGravity;
     Vector2 moveDirection = Vector2.zero;
 
-    
+
     private void OnEnable()
     {
         vecGravity = new Vector2(0f, -Physics2D.gravity.y); // Increases the gravity when falling
@@ -41,14 +44,14 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.5f, 0.1f), CapsuleDirection2D.Horizontal, 0f, LayerMask.GetMask("Ground"));
 
         // Increase gravity when falling
-        if (rb.linearVelocity.y < 0 )
+        if (rb.linearVelocity.y < 0)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y - (fallMultiplier * Time.deltaTime)); // Increases the gravity when falling
         }
         // Decrease gravity when jumping
-        if ( rb.linearVelocity.y>0 && isJumping)
+        if (rb.linearVelocity.y > 0 && isJumping)
         {
-            jumpCounter +=Time.deltaTime;
+            jumpCounter += Time.deltaTime;
             if (jumpCounter > jumpTime)
             {
                 isJumping = false;
@@ -60,10 +63,32 @@ public class PlayerMovement : MonoBehaviour
             if (t > 0.5)
             {
                 currentJumpM = jumpMultiplier * (1 - t); // Decreases the jump height over time  
-                
+
             }
             rb.linearVelocity += vecGravity * currentJumpM * Time.deltaTime;
         }
+
+        // Check if the player is moving
+        bool movingNow = rb.linearVelocity.x != 0; 
+
+        // Dust effect
+        if (movingNow && !wasMoving)
+        {
+            foreach (var ps in dustSystem)
+            {
+                ps.Play();  
+            }
+            print("Dust effect on");
+        }
+        else if (!movingNow && wasMoving)
+        {
+            foreach (var ps in dustSystem)
+            {
+                ps.Stop(true, ParticleSystemStopBehavior.StopEmitting); // Stops emitting new particles but lets old ones finish
+            }
+            print("Dust effect off");
+        }
+        wasMoving = movingNow;
 
         // Flip the player sprite
         if (isTurning)
@@ -71,12 +96,13 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(FlipPlayer());
         }
 
+
+
     }
 
     private IEnumerator FlipPlayer()
     {;
         float elapsed = 0f;
-        print("Flipping");
         Quaternion startRotation = transform.rotation;
         Quaternion endRotation = Quaternion.Euler(0f, facingRight ? 180f : 0f, 0f); 
 
@@ -146,5 +172,7 @@ public class PlayerMovement : MonoBehaviour
             moveDirection = Vector2.zero;
         }
     }
+
+
 }
 
