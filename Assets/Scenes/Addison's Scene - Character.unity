@@ -885,6 +885,7 @@ MonoBehaviour:
   jumpMultiplier: 20
   jumpCounter: 0
   jumpTime: 0.3
+  flipDuration: 0.2
   groundCheck: {fileID: 2057340752}
 --- !u!114 &1456034163
 MonoBehaviour:
