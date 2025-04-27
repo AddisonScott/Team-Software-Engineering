@@ -68,8 +68,8 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity += vecGravity * currentJumpM * Time.deltaTime;
         }
 
-        // Check if the player is moving
-        bool movingNow = rb.linearVelocity.x != 0; 
+        float threshold = 0.1f;
+        bool movingNow = isGrounded && Mathf.Abs(rb.linearVelocity.x) > threshold;
 
         // Dust effect
         if (movingNow && !wasMoving)
