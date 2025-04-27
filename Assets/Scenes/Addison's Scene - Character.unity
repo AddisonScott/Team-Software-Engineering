@@ -26312,6 +26312,7 @@ MonoBehaviour:
   - {fileID: 1416986614}
   - {fileID: 880908225}
   - {fileID: 763948869}
+  UIanimator: {fileID: 1014157146}
 --- !u!1001 &1774705807
 PrefabInstance:
   m_ObjectHideFlags: 0

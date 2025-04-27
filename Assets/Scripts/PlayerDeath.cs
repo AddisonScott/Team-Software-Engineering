@@ -10,7 +10,7 @@ public class PlayerDeath : MonoBehaviour
     public Transform playerTransform;
     public GameObject deathLocation;
     public ParticleSystem[] deathEffects;
-
+    public Animator UIanimator;
     private void Start()
     {
         playerRenderer = GetComponent<Renderer>();
@@ -22,7 +22,7 @@ public class PlayerDeath : MonoBehaviour
     }
     public void KillPlayer()
     {
-       
+        UIanimator.SetTrigger("FadeOut");
         foreach (var ps in playerMovement.dustSystem)
         {
             ps.Stop(true, ParticleSystemStopBehavior.StopEmitting); // Stops emitting new particles but lets old ones finish
@@ -34,18 +34,23 @@ public class PlayerDeath : MonoBehaviour
             playerMovement.enabled = false; // Disable player movement
             ps.Play(); // Play death effects
         }
+        // Start the respawn coroutine
         StartCoroutine(Respawn());
     }
 
     private IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(1f); // Wait for 1 second before respawning
+
+        yield return new WaitForSeconds(1.0f);
+
+        // Stop all death effects
         foreach (ParticleSystem ps in deathEffects)
         {
             ps.Stop();  // Stop the particle system
             ps.Clear(); // Clear the particles
         }
 
-        SceneManager.LoadScene("Addison's Scene - Character"); // Load scene by name
+
+        SceneManager.LoadScene("Addison's Scene - Character"); // Load scene
     }
 }
