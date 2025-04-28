@@ -5,7 +5,7 @@ public class Platform : MonoBehaviour
     public Transform startPosition;
     public Transform endPosition;
     public float moveDuration = 1f;
-
+    public float waitDuration = 1f;
     private void Awake()
     {
         // Set the initial position of the platform to the start position
@@ -18,18 +18,28 @@ public class Platform : MonoBehaviour
 
     private IEnumerator MovePlatformCoroutine()
     {
+
+        // Move the platform from start to end position
+        yield return StartCoroutine(MovePlatform(startPosition.position, endPosition.position));
+
+        // Wait for the specified duration at the end position
+        yield return new WaitForSeconds(waitDuration);
+
+        // Move the platform back to the start position
+        yield return StartCoroutine(MovePlatform(endPosition.position, startPosition.position));
+    }
+
+    private IEnumerator MovePlatform(Vector2 fromPos, Vector2 toPos)
+    {
         float elapsedTime = 0f;
-        // Loop while the platform is moving
+
         while (elapsedTime < moveDuration)
         {
-            // Smooth transition between start and end positions
-            transform.position = Vector2.Lerp(startPosition.position, endPosition.position, elapsedTime / moveDuration);
+            transform.position = Vector2.Lerp(fromPos, toPos, elapsedTime / moveDuration);
             elapsedTime += Time.deltaTime;
-            yield return null; // Wait for the next frame
+            yield return null;
         }
-        Transform temp = startPosition;
-        startPosition = endPosition;
-        endPosition = temp;  
+        transform.position = toPos;
     }
 
 
