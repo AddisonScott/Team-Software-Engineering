@@ -53,4 +53,14 @@ public class PlayerDeath : MonoBehaviour
 
         SceneManager.LoadScene("Addison's Scene - Character"); // Load scene
     }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Deadly"))
+        {
+            KillPlayer();
+        }
+    }
 }
+
