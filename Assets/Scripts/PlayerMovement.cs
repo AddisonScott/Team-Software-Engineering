@@ -70,8 +70,6 @@ public class PlayerMovement : MonoBehaviour
         float threshold = 0.1f;
         bool movingNow = isGrounded && Mathf.Abs(rb.linearVelocity.x) > threshold;
 
-        int rotationSpeed = 20;
-
         // Dust effect
         if (movingNow && !wasMoving)
         {
