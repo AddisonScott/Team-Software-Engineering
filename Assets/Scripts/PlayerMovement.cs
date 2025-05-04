@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
     public float flipDuration;
     public Transform groundCheck;
     public ParticleSystem[] dustSystem;
-
     private Rigidbody2D rb;
 
     bool wasMoving = false; // To check if the player is moving or not
@@ -71,9 +70,12 @@ public class PlayerMovement : MonoBehaviour
         float threshold = 0.1f;
         bool movingNow = isGrounded && Mathf.Abs(rb.linearVelocity.x) > threshold;
 
+        int rotationSpeed = 20;
+
         // Dust effect
         if (movingNow && !wasMoving)
         {
+
             foreach (var ps in dustSystem)
             {
                 ps.Play();  
@@ -123,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 currentVelocity = rb.linearVelocity;
         Vector2 targetVelocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y);
         float acceleration = 10f; 
-        Vector2 smoothedVelocity = Vector2.Lerp(currentVelocity, targetVelocity, acceleration * Time.fixedDeltaTime); // Curves the velocity change
+        Vector2 smoothedVelocity = Vector2.Lerp(currentVelocity, targetVelocity, acceleration * Time.fixedDeltaTime); // Smoothly transitions between the two values
         rb.linearVelocity = smoothedVelocity;
     }
 
