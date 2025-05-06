@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0527ee0e47201134198730e6678a83a0
+guid: 201a89ea54e104a4eacb30179f90bf9e
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,9 +123,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: test
+  - name: Level 1
     originalName: 
-    pivot: {x: 11.15, y: -0.06478405}
+    pivot: {x: 0.4419643, y: -0.0040629767}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,9 +133,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 20
-      height: 602
-    spriteID: 00c3d43be33af694ea4adf5cf0bf07b5
+      width: 1792
+      height: 1969
+    spriteID: decd52ee78c21e54ea92a640e735d7d7
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -147,21 +147,21 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -871206010
-    name: test
+    guid: -331763077
+    name: Level 1
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: test
+    - name: Level 1
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 177
-        y: 39
-        width: 20
-        height: 602
-      spriteId: 00c3d43be33af694ea4adf5cf0bf07b5
+        x: 208
+        y: 8
+        width: 1792
+        height: 1969
+      spriteId: decd52ee78c21e54ea92a640e735d7d7
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -180,5 +180,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 800, y: 800}
-  previousTextureSize: {x: 32, y: 1024}
+  canvasSize: {x: 2000, y: 2000}
+  previousTextureSize: {x: 2048, y: 2048}

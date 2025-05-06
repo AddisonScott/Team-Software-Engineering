@@ -17,10 +17,6 @@ public class PlayerDeath : MonoBehaviour
     {
         playerRenderer = GetComponent<Renderer>();
         playerMovement = GetComponent<PlayerMovement>();
-        if (deathEffects.Length == 0)
-        {
-            Debug.LogWarning("No death effects assigned to PlayerDeath script.");
-        }
     }
     public void KillPlayer()
     {

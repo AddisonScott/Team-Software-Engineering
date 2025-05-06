@@ -555,7 +555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _renderer: {fileID: 6143550607557509684}
   _collider: {fileID: 608335840}
-  distanceLimit: 3
+  distanceLimit: 1.5
 --- !u!120 &6143550607557509684
 LineRenderer:
   serializedVersion: 2
