@@ -1,0 +1,45 @@
+using Unity.Cinemachine;
+using UnityEngine;
+
+public class WorldManager : MonoBehaviour
+{
+    [SerializeField] private GameObject m_PlayerPrefab;
+    [SerializeField] private GameObject m_PlayerCamera;
+    [SerializeField] private GameObject m_CinemachineCamera;
+
+    [SerializeField] private GameObject m_OtherPlayerPrefab;
+
+    [SerializeField] private GameObject m_DeathExplosion;
+
+    private GameObject m_Player;
+    private GameObject m_OtherPlayer;
+
+    private void Awake()
+    {
+        Client.Instance.WorldManager = this;
+    }
+
+    public void CreatePlayer(Vector3 position)
+    {
+        Instantiate(m_PlayerCamera);
+        GameObject cam = Instantiate(m_CinemachineCamera);
+        GameObject explosion = Instantiate(m_DeathExplosion);
+
+        m_Player = Instantiate(m_PlayerPrefab);
+        m_Player.GetComponent<PlayerDeath>().deathLocation = explosion;
+        m_Player.transform.position = position;
+
+        cam.GetComponent<CinemachineCamera>().Target.TrackingTarget = m_Player.transform;
+    }
+
+    public void CreateOtherPlayer(Vector3 position)
+    {
+        m_OtherPlayer = Instantiate(m_OtherPlayerPrefab);
+        m_OtherPlayer.transform.position = position;
+    }
+
+    public void PositionOtherPlayer(Vector3 newPosition)
+    {
+        m_OtherPlayer.transform.position = newPosition;
+    }
+}
