@@ -18,6 +18,7 @@ public class Client : MonoBehaviour
     public TCPConnection TCP;
 
     public WorldManager WorldManager;
+    public bool FirstPlayer;
 
     private bool m_IsConnected = false;
 

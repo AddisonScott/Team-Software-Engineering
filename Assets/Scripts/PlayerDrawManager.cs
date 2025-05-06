@@ -34,6 +34,7 @@ public class PlayerDrawManager : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
+            //GetComponent<LineSync>().SyncLine(_currentLine);
             _currentLine = null;
         }
 

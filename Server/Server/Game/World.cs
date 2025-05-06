@@ -101,12 +101,7 @@ namespace Server.Game
 
         public Vector3 GetNextSpawnpoint()
         {
-            if(m_PlayerMap.Count == 0)
-            {
-                return new Vector3(-3.0f, -1.0f, 0.0f);
-            }
-
-            return new Vector3(3.0f, -1.0f, 0.0f);
+            return new Vector3(-3.0f, -1.0f, 0.0f);
         }
     }
 }

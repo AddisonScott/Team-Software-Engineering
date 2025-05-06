@@ -151,6 +151,7 @@ MonoBehaviour:
   m_PlayerPrefab: {fileID: 6273279268604295436, guid: f58ac02b39b53454aaba8415dcea26db, type: 3}
   m_PlayerCamera: {fileID: 2087095600156504489, guid: 5bc54613d0772234b9ec1cff839360cd, type: 3}
   m_CinemachineCamera: {fileID: 2458392452781023219, guid: 6954342ed7cd16b46914c565e41a536a, type: 3}
+  m_SpectatorPlayerPrefab: {fileID: 7133235162659506498, guid: 2e2b72637daf68e478aceeb02bf378b6, type: 3}
   m_OtherPlayerPrefab: {fileID: 1490409503038411267, guid: 30e6be2778d41574db26bd4e1e5a0bf3, type: 3}
   m_DeathExplosion: {fileID: 6473422975366867710, guid: 0b8f9c76c89ecf040a31377bb60a57e9, type: 3}
 --- !u!4 &1041854414

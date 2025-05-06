@@ -18,6 +18,9 @@ public class ClientHandle
     public static void SendLevel(Packet packet)
     {
         int levelID = packet.ReadInt();
+        bool firstPlayer = packet.ReadBool();
+        
+        Client.Instance.FirstPlayer = firstPlayer;
 
         SceneManager.LoadScene(levelID);
         ClientSend.LevelReceived();
@@ -43,7 +46,10 @@ public class ClientHandle
 
     public static void UpdateOtherPlayer(Packet packet)
     {
-        Vector3 pos = packet.ReadVector3();
-        Client.Instance.WorldManager.PositionOtherPlayer(pos);
+        if (!Client.Instance.FirstPlayer)
+        {
+            Vector3 pos = packet.ReadVector3();
+            Client.Instance.WorldManager.PositionOtherPlayer(pos);
+        }
     }
 }

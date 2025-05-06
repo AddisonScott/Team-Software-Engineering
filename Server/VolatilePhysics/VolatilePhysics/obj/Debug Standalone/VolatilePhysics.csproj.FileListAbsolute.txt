@@ -1,0 +1,7 @@
+E:\Dev\TSE-Server\Server\VolatilePhysics\VolatilePhysics\bin\Debug Standalone\VolatilePhysics.dll
+E:\Dev\TSE-Server\Server\VolatilePhysics\VolatilePhysics\bin\Debug Standalone\VolatilePhysics.pdb
+E:\Dev\TSE-Server\Server\VolatilePhysics\VolatilePhysics\bin\Debug Standalone\VolatilePhysics.XML
+E:\Dev\TSE-Server\Server\VolatilePhysics\VolatilePhysics\obj\Debug Standalone\VolatilePhysics.csproj.AssemblyReference.cache
+E:\Dev\TSE-Server\Server\VolatilePhysics\VolatilePhysics\obj\Debug Standalone\VolatilePhysics.csproj.CoreCompileInputs.cache
+E:\Dev\TSE-Server\Server\VolatilePhysics\VolatilePhysics\obj\Debug Standalone\VolatilePhysics.dll
+E:\Dev\TSE-Server\Server\VolatilePhysics\VolatilePhysics\obj\Debug Standalone\VolatilePhysics.pdb

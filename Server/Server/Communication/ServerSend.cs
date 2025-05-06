@@ -73,6 +73,7 @@ namespace Server
             using(Packet packet = new Packet((int)ServerPackets.SendLevel))
             {
                 packet.WriteInt(levelID); // The ID of the level to switch to
+                packet.WriteBool(Program.World.GetPlayerCount() == 1); // Whether or not this is the first player
                 packet.WriteInt(toClient);
                 SendTCPData(toClient, packet);
             }
