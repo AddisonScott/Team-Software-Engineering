@@ -9,8 +9,10 @@ public class PlayerDeath : MonoBehaviour
 
     public Transform playerTransform;
     public GameObject deathLocation;
+    public GameObject playerSprite;
     public ParticleSystem[] deathEffects;
     public Animator UIanimator;
+    
     private void Start()
     {
         playerRenderer = GetComponent<Renderer>();
@@ -22,6 +24,7 @@ public class PlayerDeath : MonoBehaviour
     }
     public void KillPlayer()
     {
+        playerSprite.SetActive(false);
         UIanimator.SetTrigger("FadeOut");
         foreach (var ps in playerMovement.dustSystem)
         {
