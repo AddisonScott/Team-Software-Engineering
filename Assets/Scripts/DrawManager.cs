@@ -4,26 +4,30 @@ public class DrawManager : MonoBehaviour
 {
     public Camera _cam;
     [SerializeField] private Line _linePrefab;
-    private Line[] _lines = new Line[3]; 
+    private Line[] _lines = new Line[2]; 
     public const float RESOLUTION = 0.1f;
     private Line _currentLine;
     private int lineNumber = 0;
-    private float lastDrawTime = -0.5f;
+    void Start()
+    {
+        
+    }
 
+    // Update is called once per frame
     void Update()
     {
-        Vector2 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
 
+        Vector2 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
         if (lineNumber < _lines.Length)
         {
-            if (Input.GetMouseButtonDown(0) && Time.time - lastDrawTime >= 0.5f)
+            if (Input.GetMouseButtonDown(0))
             {
                 _currentLine = Instantiate(_linePrefab);
                 _lines[lineNumber] = _currentLine;
                 lineNumber++;
-                lastDrawTime = Time.time;
             }
         }
+
 
         if (Input.GetMouseButton(0) && _currentLine != null)
         {
