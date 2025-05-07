@@ -79,6 +79,7 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.PlayerJoined, ClientHandle.PlayerJoined },
             { (int)ServerPackets.UpdateOtherPlayer, ClientHandle.UpdateOtherPlayer },
             { (int)ServerPackets.LineCreate, ClientHandle.LineCreate },
+            { (int)ServerPackets.LineRemove, ClientHandle.LineRemove },
         };
         Debug.Log("Initialized packets.");
     }

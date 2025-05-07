@@ -77,6 +77,7 @@ namespace Server
                 { (int)ClientPackets.LevelReceived, ServerHandle.LevelReceived },
                 { (int)ClientPackets.PlayerSync, ServerHandle.PlayerSync },
                 { (int)ClientPackets.CreateLine, ServerHandle.CreateLine },
+                { (int)ClientPackets.RemoveLine, ServerHandle.RemoveLine },
             };
             Console.WriteLine("Initialised Server");
         }

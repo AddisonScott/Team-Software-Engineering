@@ -71,7 +71,6 @@ public class WorldManager : MonoBehaviour
 
     public void AddLine(List<Vector2> points)
     {
-        Debug.Log(Client.Instance.FirstPlayer);
         if(Client.Instance.FirstPlayer)
         {
             m_OtherDrawManager.AddLine(points);
@@ -79,6 +78,18 @@ public class WorldManager : MonoBehaviour
         else
         {
             m_DrawManager.AddLine(points);
+        }
+    }
+
+    public void RemoveLine(int lineIndex)
+    {
+        if(Client.Instance.FirstPlayer)
+        {
+            m_OtherDrawManager.RemoveLine(lineIndex);
+        }
+        else
+        {
+            m_DrawManager.RemoveLine(lineIndex);
         }
     }
 }

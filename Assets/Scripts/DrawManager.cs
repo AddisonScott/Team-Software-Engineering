@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DrawManager : MonoBehaviour
@@ -51,7 +52,8 @@ public class DrawManager : MonoBehaviour
                 {
                     Destroy(_lines[i].gameObject); 
                     _lines[i] = null; 
-                    lineNumber--; 
+                    lineNumber--;
+                    ClientSend.RemoveLine(i);
                     break;
                 }
             }
@@ -60,7 +62,6 @@ public class DrawManager : MonoBehaviour
 
     public void AddLine(List<Vector2> points)
     {
-        Debug.Log(points[0]);
         _currentLine = Instantiate(_linePrefab);
         _currentLine.GetComponent<EdgeCollider2D>().enabled = true;
         for (int i = 0; i < points.Count; i++)
@@ -71,5 +72,17 @@ public class DrawManager : MonoBehaviour
         lineNumber++;
         lastDrawTime = Time.time;
         _currentLine = null;
+    }
+
+    public void RemoveLine(int index)
+    {
+        Debug.Log(index);
+        Debug.Log(lineNumber);
+        if(index >= 0 && index < lineNumber)
+        {
+            Destroy(_lines[index].gameObject);
+            _lines[index] = null;
+            lineNumber--;
+        }
     }
 }

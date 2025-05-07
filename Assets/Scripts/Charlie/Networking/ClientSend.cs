@@ -75,5 +75,15 @@ public class ClientSend
             SendTCPData(packet);
         }
     }
+
+    public static void RemoveLine(int lineIndex)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.RemoveLine))
+        {
+            packet.WriteInt(Client.Instance.ID);
+            packet.WriteInt(lineIndex);
+            SendTCPData(packet);
+        }
+    }
     #endregion
 }

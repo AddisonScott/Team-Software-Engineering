@@ -17,6 +17,7 @@ namespace Server
         PlayerJoined = 5,
         UpdateOtherPlayer = 6,
         LineCreate = 7,
+        LineRemove = 8,
     }
 
     public enum ClientPackets
@@ -25,6 +26,7 @@ namespace Server
         LevelReceived = 2,
         PlayerSync = 3,
         CreateLine = 4,
+        RemoveLine = 5,
     }
 
     class Packet : IDisposable

@@ -142,5 +142,15 @@ namespace Server
                 SendTCPDataToAllExcept(clientID, packet);
             }
         }
+
+        public static void LineRemove(int clientID, int lineIndex)
+        {
+            using (Packet packet = new Packet((int)ServerPackets.LineRemove))
+            {
+                packet.WriteInt(lineIndex);
+                packet.WriteInt(clientID);
+                SendTCPDataToAllExcept(clientID, packet);
+            }
+        }
     }
 }

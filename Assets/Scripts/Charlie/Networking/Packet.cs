@@ -13,6 +13,7 @@ public enum ServerPackets
     PlayerJoined = 5,
     UpdateOtherPlayer = 6,
     LineCreate = 7,
+    LineRemove = 8,
 }
 
 public enum ClientPackets
@@ -21,6 +22,7 @@ public enum ClientPackets
     LevelReceived = 2,
     PlayerSync = 3,
     CreateLine = 4,
+    RemoveLine = 5,
 }
 
 public class Packet : IDisposable

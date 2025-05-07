@@ -65,4 +65,10 @@ public class ClientHandle
 
         Client.Instance.WorldManager.AddLine(points);
     }
+
+    public static void LineRemove(Packet packet)
+    {
+        int lineIndex = packet.ReadInt();
+        Client.Instance.WorldManager.RemoveLine(lineIndex);
+    }
 }

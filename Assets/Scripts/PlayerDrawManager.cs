@@ -52,6 +52,7 @@ public class PlayerDrawManager : MonoBehaviour
                     Destroy(_lines[i].gameObject);
                     _lines[i] = null;
                     lineNumber--;
+                    ClientSend.RemoveLine(i);
                     break;
                 }
             }
@@ -68,5 +69,15 @@ public class PlayerDrawManager : MonoBehaviour
         }
         _lines.Add(line);
         lineNumber++;
+    }
+
+    public void RemoveLine(int index)
+    {
+        if(index >= 0 && index < _lines.Count)
+        {
+            Destroy(_lines[index].gameObject);
+            _lines[index] = null;
+            lineNumber--;
+        }
     }
 }

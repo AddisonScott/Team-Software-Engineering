@@ -91,5 +91,19 @@ namespace Server
             int lineIndex = Program.World.EndLine();
             ServerSend.LineCreate(clientID, lineIndex);
         }
+
+        public static void RemoveLine(int fromClient, Packet packet)
+        {
+            int clientID = packet.ReadInt();
+
+            if (fromClient != clientID)
+            {
+                Console.WriteLine($"\"{Server.Clients[clientID].Data.Username}\" (ID: {fromClient}) has assumed the wrong client ID ({clientID})!");
+                return;
+            }
+
+            int lineIndex = packet.ReadInt();
+            ServerSend.LineRemove(clientID, lineIndex);
+        }
     }
 }
