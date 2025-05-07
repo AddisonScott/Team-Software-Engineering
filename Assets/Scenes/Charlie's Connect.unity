@@ -169,8 +169,6 @@ MonoBehaviour:
   ID: 0
   WorldManager: {fileID: 0}
   FirstPlayer: 0
-  Line: []
-  CurrentSegment: 0
 --- !u!1 &266791459
 GameObject:
   m_ObjectHideFlags: 0

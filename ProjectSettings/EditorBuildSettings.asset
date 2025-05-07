@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Addison's Scene - Character.unity
     guid: e819ce0d16a792d47abf2f6d087fd59d
   - enabled: 1
+    path: Assets/Scenes/EndScreen.unity
+    guid: afab28dc850a1e84baf4dbe0307c6790
+  - enabled: 1
     path: Assets/Scenes/Charlie's Connect.unity
     guid: 2a21e8dc7e7aabd4d880951f607f7570
   - enabled: 1
