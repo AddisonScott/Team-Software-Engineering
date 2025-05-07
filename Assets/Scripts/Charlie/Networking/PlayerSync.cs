@@ -13,9 +13,12 @@ public class PlayerSync : MonoBehaviour
 
     private void Update()
     {
+        if (!Client.Instance.Connected())
+            return;
+
         if(Vector3.Distance(m_PreviousPosition, transform.position) > m_UpdateMovementThreshold)
         {
-            ClientSend.PlayerSync(transform.position);
+            ClientSend.PlayerSync(transform.position, transform.rotation.y);
             m_PreviousPosition = transform.position;
         }
     }

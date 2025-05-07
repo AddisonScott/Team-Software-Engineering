@@ -4,6 +4,6 @@ public class StartScreen : MonoBehaviour
 {
     public void PressStart()
     {
-        SceneManager.LoadScene("Addison's Scene - Character");
+        SceneManager.LoadScene("Charlie's Connect");
     }
 }

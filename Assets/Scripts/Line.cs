@@ -11,7 +11,7 @@ public class Line : MonoBehaviour
     private List<Vector2> _points = new List<Vector2>();
    
 
-    public int distanceLimit = 3;
+    public float distanceLimit = 1.5f;
     public void SetPosition(Vector2 pos) { 
         if (!CanAppend(pos)) return;
 

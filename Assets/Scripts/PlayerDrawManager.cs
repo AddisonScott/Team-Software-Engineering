@@ -73,11 +73,24 @@ public class PlayerDrawManager : MonoBehaviour
 
     public void RemoveLine(int index)
     {
-        if(index >= 0 && index < _lines.Count)
+        if (index >= 0 && index < _lines.Count)
         {
             Destroy(_lines[index].gameObject);
             _lines[index] = null;
             lineNumber--;
+        }
+    }
+
+    public void Clear()
+    {
+        for (int i = _lines.Count - 1; i >= 0; i--)
+        {
+            if (_lines[i] != null)
+            {
+                Destroy(_lines[i].gameObject);
+                _lines[i] = null;
+                lineNumber--;
+            }
         }
     }
 }

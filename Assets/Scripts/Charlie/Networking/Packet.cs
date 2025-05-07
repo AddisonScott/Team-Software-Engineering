@@ -14,6 +14,9 @@ public enum ServerPackets
     UpdateOtherPlayer = 6,
     LineCreate = 7,
     LineRemove = 8,
+    GameWon = 9,
+    DeadPlayer = 10,
+    PlayerDisconnected = 11,
 }
 
 public enum ClientPackets
@@ -23,6 +26,9 @@ public enum ClientPackets
     PlayerSync = 3,
     CreateLine = 4,
     RemoveLine = 5,
+    EnteredGoal = 6,
+    FinishedGame = 7,
+    PlayerDied = 8,
 }
 
 public class Packet : IDisposable

@@ -18,11 +18,52 @@ namespace Server.Game
         private List<Line> m_Lines;
         private Line m_CurrentLine;
 
+        private bool m_EnteredGoal;
+        private int m_GoalEnterer;
+        private bool m_GameFinished;
+
         public World()
+        {
+            m_LevelIndex = 2;
+            m_PlayerMap = new Dictionary<int, Player>();
+            m_Lines = new List<Line>();
+            m_EnteredGoal = false;
+            m_GameFinished = false;
+        }
+
+        public bool HasEnteredGoal()
+        {
+            return m_EnteredGoal;
+        }
+
+        public bool IsGameFinished()
+        {
+            return m_GameFinished;
+        }
+
+        public void EnterGoal(int id)
+        {
+            m_EnteredGoal = true;
+            m_GoalEnterer = id;
+        }
+
+        public void FinishGame()
+        {
+            m_GameFinished = true;
+        }
+
+        public int GetGoalEntererID()
+        {
+            return m_GoalEnterer;
+        }
+
+        public void Reset()
         {
             m_LevelIndex = 1;
             m_PlayerMap = new Dictionary<int, Player>();
             m_Lines = new List<Line>();
+            m_EnteredGoal = false;
+            m_GameFinished = false;
         }
 
         /// <summary>
@@ -103,9 +144,14 @@ namespace Server.Game
             return m_PlayerMap.Count;
         }
 
+        public bool ContainsPlayer(int id)
+        {
+            return m_PlayerMap.ContainsKey(id);
+        }
+
         public Vector3 GetNextSpawnpoint()
         {
-            return new Vector3(-3.0f, -1.0f, 0.0f);
+            return new Vector3(-2.894f, -2.4f, 0.0f);
         }
 
         public void StartNewLine()

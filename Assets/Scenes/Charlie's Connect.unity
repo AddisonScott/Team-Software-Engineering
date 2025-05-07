@@ -167,6 +167,7 @@ MonoBehaviour:
   Username: 
   Port: 26950
   ID: 0
+  m_ThreadManager: {fileID: 752029611}
   WorldManager: {fileID: 0}
   FirstPlayer: 0
 --- !u!1 &266791459

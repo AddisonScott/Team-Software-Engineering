@@ -78,6 +78,9 @@ namespace Server
                 { (int)ClientPackets.PlayerSync, ServerHandle.PlayerSync },
                 { (int)ClientPackets.CreateLine, ServerHandle.CreateLine },
                 { (int)ClientPackets.RemoveLine, ServerHandle.RemoveLine },
+                { (int)ClientPackets.EnteredGoal, ServerHandle.EnteredGoal },
+                { (int)ClientPackets.FinishedGame, ServerHandle.FinishedGame },
+                { (int)ClientPackets.PlayerDied, ServerHandle.PlayerDied },
             };
             Console.WriteLine("Initialised Server");
         }

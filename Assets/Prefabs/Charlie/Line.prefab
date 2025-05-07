@@ -149,7 +149,7 @@ EdgeCollider2D:
   m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 51808f01c03f165489ea682cf7053ef1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

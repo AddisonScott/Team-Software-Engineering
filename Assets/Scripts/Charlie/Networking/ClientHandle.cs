@@ -49,7 +49,8 @@ public class ClientHandle
         if (!Client.Instance.FirstPlayer)
         {
             Vector3 pos = packet.ReadVector3();
-            Client.Instance.WorldManager.PositionOtherPlayer(pos);
+            float rotation = packet.ReadFloat();
+            Client.Instance.WorldManager.PositionOtherPlayer(pos, rotation);
         }
     }
 
@@ -70,5 +71,23 @@ public class ClientHandle
     {
         int lineIndex = packet.ReadInt();
         Client.Instance.WorldManager.RemoveLine(lineIndex);
+    }
+
+    public static void GameWon(Packet packet)
+    {
+        Client.Instance.WorldManager.Win();
+        ClientSend.FinishedGame();
+    }
+
+    public static void DeadPlayer(Packet packet)
+    {
+        Client.Instance.WorldManager.FadeAnimator.SetTrigger("FadeOut");
+        Client.Instance.WorldManager.Reset();
+        Client.Instance.WorldManager.FadeAnimator.SetTrigger("FadeIn");
+    }
+
+    public static void PlayerDisconnected(Packet packet)
+    {
+        Client.Instance.WorldManager.Disconnect();
     }
 }

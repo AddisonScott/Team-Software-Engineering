@@ -116,11 +116,12 @@ namespace Server
             }
         }
 
-        public static void UpdateOtherPlayer(int clientID, Vector3 newPosition)
+        public static void UpdateOtherPlayer(int clientID, Vector3 newPosition, float rotation)
         {
             using (Packet packet = new Packet((int)ServerPackets.UpdateOtherPlayer))
             {
                 packet.WriteVector3(newPosition);
+                packet.WriteFloat(rotation);
                 packet.WriteInt(clientID);
 
                 SendTCPDataToAllExcept(clientID, packet);
@@ -148,6 +149,33 @@ namespace Server
             using (Packet packet = new Packet((int)ServerPackets.LineRemove))
             {
                 packet.WriteInt(lineIndex);
+                packet.WriteInt(clientID);
+                SendTCPDataToAllExcept(clientID, packet);
+            }
+        }
+
+        public static void GameWon(int clientID)
+        {
+            using(Packet packet = new Packet((int)ServerPackets.GameWon))
+            {
+                packet.WriteInt(clientID);
+                SendTCPDataToAllExcept(clientID, packet);
+            }
+        }
+
+        public static void DeadPlayer(int clientID)
+        {
+            using(Packet packet = new Packet((int)ServerPackets.DeadPlayer))
+            {
+                packet.WriteInt(clientID);
+                SendTCPDataToAllExcept(clientID, packet);
+            }
+        }
+
+        public static void PlayerDisconnected(int clientID)
+        {
+            using(Packet packet = new Packet((int)ServerPackets.PlayerDisconnected))
+            {
                 packet.WriteInt(clientID);
                 SendTCPDataToAllExcept(clientID, packet);
             }

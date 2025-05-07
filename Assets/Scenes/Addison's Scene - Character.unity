@@ -21646,7 +21646,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1381510109}
   - component: {fileID: 1381510110}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21678,7 +21678,7 @@ EdgeCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 51808f01c03f165489ea682cf7053ef1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

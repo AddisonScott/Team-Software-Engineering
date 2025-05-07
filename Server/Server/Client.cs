@@ -27,9 +27,8 @@ namespace Server
         public void Disconnect()
         {
             Console.WriteLine($"\"{Data.Username}\" (ID: {ID}) has disconnected");
-
+            ServerSend.PlayerDisconnected(ID);
             Program.World.RemovePlayer(ID);
-
             TCP.Disconnect();
         }
     }

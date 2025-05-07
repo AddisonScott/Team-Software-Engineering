@@ -17,6 +17,8 @@ public class Client : MonoBehaviour
     public int ID = 0;
     public TCPConnection TCP;
 
+    [SerializeField] private GameObject m_ThreadManager;
+
     [HideInInspector] public WorldManager WorldManager;
     [HideInInspector] public bool FirstPlayer;
 
@@ -65,6 +67,7 @@ public class Client : MonoBehaviour
         InitializeClientData();
 
         m_IsConnected = true;
+
         TCP.Connect();
     }
 
@@ -79,7 +82,9 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.PlayerJoined, ClientHandle.PlayerJoined },
             { (int)ServerPackets.UpdateOtherPlayer, ClientHandle.UpdateOtherPlayer },
             { (int)ServerPackets.LineCreate, ClientHandle.LineCreate },
-            { (int)ServerPackets.LineRemove, ClientHandle.LineRemove },
+            { (int)ServerPackets.GameWon, ClientHandle.GameWon },
+            { (int)ServerPackets.DeadPlayer, ClientHandle.DeadPlayer },
+            { (int)ServerPackets.PlayerDisconnected, ClientHandle.PlayerDisconnected },
         };
         Debug.Log("Initialized packets.");
     }
@@ -91,7 +96,17 @@ public class Client : MonoBehaviour
             m_IsConnected = false;
             TCP.Socket.Close();
 
+            Destroy(m_ThreadManager);
             Debug.Log("Disconnected from the server");
+
+            // NOTE: Its okay to call this here despite a risk of "infinite" recursion as this code is only run when m_IsConnected is true,
+            // which we know won't be the case the second time this function is called
+            WorldManager.Disconnect();
         }
+    }
+
+    public bool Connected()
+    {
+        return m_IsConnected;
     }
 }

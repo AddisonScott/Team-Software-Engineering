@@ -26,7 +26,7 @@ namespace Server
             Thread main = new Thread(new ThreadStart(MainThread));
             main.Start();
 
-            Server.Start(50, 26950);
+            Server.Start(2, 26950);
         }
 
         private static void MainThread()
@@ -39,6 +39,24 @@ namespace Server
                 while(nextLoop < DateTime.Now)
                 {
                     Logic.Update();
+
+                    if(World.HasEnteredGoal())
+                    {
+                        // NOTE: Sometimes the packet for ending the game is missed by the spectator player
+                        // This code ensures that the packet is sent every tick until that player responds
+                        if (!World.IsGameFinished())
+                        {
+                            ServerSend.GameWon(World.GetGoalEntererID());
+                        }
+                        else
+                        {
+                            // NOTE: Once we are sure that the game has fully ended and both clients are disconnected,
+                            // we can reset the World ready for the next players (so that we don't have to keep closing
+                            // and reopening the server)
+                            World.Reset();
+                        }
+                    }
+
                     nextLoop = nextLoop.AddMilliseconds(Constants.MS_PER_TICK);
 
                     if (nextLoop > DateTime.Now)

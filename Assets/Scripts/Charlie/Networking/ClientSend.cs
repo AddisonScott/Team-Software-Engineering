@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class ClientSend
@@ -33,12 +34,13 @@ public class ClientSend
         }
     }
 
-    public static void PlayerSync(Vector3 position)
+    public static void PlayerSync(Vector3 position, float rotation)
     {
         using(Packet packet = new Packet((int)ClientPackets.PlayerSync))
         {
             packet.WriteInt(Client.Instance.ID);
             packet.WriteVector3(position);
+            packet.WriteFloat(rotation);
 
             SendTCPData(packet);
         }
@@ -82,6 +84,33 @@ public class ClientSend
         {
             packet.WriteInt(Client.Instance.ID);
             packet.WriteInt(lineIndex);
+            SendTCPData(packet);
+        }
+    }
+
+    public static void EnteredGoal()
+    {
+        using(Packet packet = new Packet((int)ClientPackets.EnteredGoal))
+        {
+            packet.WriteInt(Client.Instance.ID);
+            SendTCPData(packet);
+        }
+    }
+
+    public static void FinishedGame()
+    {
+        using(Packet packet = new Packet((int)ClientPackets.FinishedGame))
+        {
+            packet.WriteInt(Client.Instance.ID);
+            SendTCPData(packet);
+        }
+    }
+
+    public static void PlayerDied()
+    {
+        using(Packet packet = new Packet((int)ClientPackets.PlayerDied))
+        {
+            packet.WriteInt(Client.Instance.ID);
             SendTCPData(packet);
         }
     }

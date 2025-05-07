@@ -39,7 +39,6 @@ public class PlayerDeath : MonoBehaviour
 
     private IEnumerator Respawn()
     {
-
         yield return new WaitForSeconds(1.0f);
 
         // Stop all death effects
@@ -49,8 +48,9 @@ public class PlayerDeath : MonoBehaviour
             ps.Clear(); // Clear the particles
         }
 
-
-        SceneManager.LoadScene("Addison's Scene - Character"); // Load scene
+        Client.Instance.WorldManager.Reset();
+        ClientSend.PlayerDied();
+        UIanimator.SetTrigger("FadeIn");
     }
 
 

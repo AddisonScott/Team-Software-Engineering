@@ -5033,7 +5033,7 @@ MonoBehaviour:
   deathLocation: {fileID: 0}
   playerSprite: {fileID: 9215733571411250866}
   deathEffects:
-  - {fileID: 0}
+  - {fileID: 2248723179235433772}
   - {fileID: 0}
   - {fileID: 0}
   UIanimator: {fileID: 0}
@@ -5183,9 +5183,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &1691008689240904358
 CapsuleCollider2D:

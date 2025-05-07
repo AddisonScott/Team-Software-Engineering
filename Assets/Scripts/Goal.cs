@@ -23,7 +23,12 @@ public class Goal : MonoBehaviour
     {
         UIanimator.SetTrigger("FadeOut");
         yield return new WaitForSeconds(1.0f);
+        Client.Instance.Disconnect();
         SceneManager.LoadScene("EndScreen");
-       
+    }
+
+    public void End()
+    {
+        StartCoroutine(endScreenTransition());
     }
 }

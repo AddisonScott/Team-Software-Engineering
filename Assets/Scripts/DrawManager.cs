@@ -85,4 +85,17 @@ public class DrawManager : MonoBehaviour
             lineNumber--;
         }
     }
+
+    public void Clear()
+    {
+        for (int i = _lines.Length - 1; i >= 0; i--)
+        {
+            if (_lines[i] != null)
+            {
+                Destroy(_lines[i].gameObject);
+                _lines[i] = null;
+                lineNumber--;
+            }
+        }
+    }
 }

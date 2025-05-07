@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Deadly
+  - Fader
   layers:
   - Default
   - TransparentFX

@@ -65,9 +65,14 @@ namespace Server
                 return;
             }
 
-            Vector3 newPosition = packet.ReadVector3();
-            Program.World.GetPlayer(clientID).Position = newPosition;
-            ServerSend.UpdateOtherPlayer(clientID, newPosition);
+            // NOTE: Fixes weird issue where the client is attempting to sync after disconnecting
+            if (Program.World.ContainsPlayer(clientID))
+            {
+                Vector3 newPosition = packet.ReadVector3();
+                float rotation = packet.ReadFloat();
+                Program.World.GetPlayer(clientID).Position = newPosition;
+                ServerSend.UpdateOtherPlayer(clientID, newPosition, rotation);
+            }
         }
 
         public static void CreateLine(int fromClient, Packet packet)
@@ -104,6 +109,46 @@ namespace Server
 
             int lineIndex = packet.ReadInt();
             ServerSend.LineRemove(clientID, lineIndex);
+        }
+
+        public static void EnteredGoal(int fromClient, Packet packet)
+        {
+            int clientID = packet.ReadInt();
+
+            if (fromClient != clientID)
+            {
+                Console.WriteLine($"\"{Server.Clients[clientID].Data.Username}\" (ID: {fromClient}) has assumed the wrong client ID ({clientID})!");
+                return;
+            }
+
+            Program.World.EnterGoal(clientID);
+            ServerSend.GameWon(clientID);
+        }
+
+        public static void FinishedGame(int fromClient, Packet packet)
+        {
+            int clientID = packet.ReadInt();
+
+            if(fromClient != clientID)
+            {
+                Console.WriteLine($"\"{Server.Clients[clientID].Data.Username}\" (ID: {fromClient}) has assumed the wrong client ID ({clientID})!");
+                return;
+            }
+
+            Program.World.FinishGame();
+        }
+
+        public static void PlayerDied(int fromClient, Packet packet)
+        {
+            int clientID = packet.ReadInt();
+
+            if (fromClient != clientID)
+            {
+                Console.WriteLine($"\"{Server.Clients[clientID].Data.Username}\" (ID: {fromClient}) has assumed the wrong client ID ({clientID})!");
+                return;
+            }
+
+            ServerSend.DeadPlayer(clientID);
         }
     }
 }
