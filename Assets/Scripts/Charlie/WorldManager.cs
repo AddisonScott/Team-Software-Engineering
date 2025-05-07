@@ -15,7 +15,7 @@ public class WorldManager : MonoBehaviour
     [SerializeField] private GameObject m_DeathExplosion;
 
     [SerializeField] private PlayerDrawManager m_DrawManager;
-    [SerializeField] private OtherPlayerLineManager m_OtherLines;
+    [SerializeField] private DrawManager m_OtherDrawManager;
 
     private GameObject m_Player;
     private GameObject m_OtherPlayer;
@@ -38,13 +38,20 @@ public class WorldManager : MonoBehaviour
             m_Player.transform.position = position;
 
             m_DrawManager._cam = playerCam.GetComponent<Camera>();
+            m_OtherDrawManager._cam = m_Player.GetComponent<Camera>();
             cam.GetComponent<CinemachineCamera>().Target.TrackingTarget = m_Player.transform;
+
+            m_DrawManager.Active = true;
+            m_OtherDrawManager.Active = false;
         }
         else
         {
-            // Spawn in as spectator
             m_Player = Instantiate(m_SpectatorPlayerPrefab);
             m_DrawManager._cam = m_Player.GetComponent<Camera>();
+            m_OtherDrawManager._cam = m_Player.GetComponent<Camera>();
+
+            m_DrawManager.Active = false;
+            m_OtherDrawManager.Active = true;
         }
     }
 
@@ -64,9 +71,10 @@ public class WorldManager : MonoBehaviour
 
     public void AddLine(List<Vector2> points)
     {
+        Debug.Log(Client.Instance.FirstPlayer);
         if(Client.Instance.FirstPlayer)
         {
-            m_OtherLines.AddLine(points);
+            m_OtherDrawManager.AddLine(points);
         }
         else
         {

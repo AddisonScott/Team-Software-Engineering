@@ -59,5 +59,21 @@ public class ClientSend
             SendTCPData(packet);
         }
     }
+
+    public static void CreateLine(Line line)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.CreateLine))
+        {
+            packet.WriteInt(Client.Instance.ID);
+
+            packet.WriteInt(line.GetPoints().Count);
+            for (int i = 0; i < line.GetPoints().Count; i++)
+            {
+                packet.WriteVector2(line.GetPoints()[i]);
+            }
+
+            SendTCPData(packet);
+        }
+    }
     #endregion
 }

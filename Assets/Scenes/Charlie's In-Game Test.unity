@@ -119,6 +119,53 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &119921285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 119921286}
+  - component: {fileID: 119921288}
+  m_Layer: 0
+  m_Name: Draw Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &119921286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119921285}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &119921288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119921285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb1f99c550503c24e9c2d1fe5bfa4251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cam: {fileID: 0}
+  _linePrefab: {fileID: 1319967717}
+  Active: 1
 --- !u!1 &138993170
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,7 +354,7 @@ MonoBehaviour:
   m_OtherPlayerPrefab: {fileID: 1490409503038411267, guid: 30e6be2778d41574db26bd4e1e5a0bf3, type: 3}
   m_DeathExplosion: {fileID: 6473422975366867710, guid: 0b8f9c76c89ecf040a31377bb60a57e9, type: 3}
   m_DrawManager: {fileID: 1153747580}
-  m_OtherLines: {fileID: 1153747582}
+  m_OtherDrawManager: {fileID: 119921288}
 --- !u!4 &1041854414
 Transform:
   m_ObjectHideFlags: 0
@@ -333,7 +380,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1153747581}
   - component: {fileID: 1153747580}
-  - component: {fileID: 1153747582}
   m_Layer: 0
   m_Name: Player Draw Manager
   m_TagString: Untagged
@@ -355,6 +401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cam: {fileID: 0}
   _linePrefab: {fileID: 4378988888595154732, guid: e53db27c86c03d54f9416619ecd6203d, type: 3}
+  Active: 1
 --- !u!4 &1153747581
 Transform:
   m_ObjectHideFlags: 0
@@ -370,19 +417,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1153747582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1153747579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c02475119adda4447ae6745b610d770d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _linePrefab: {fileID: 1319967717}
 --- !u!1001 &1319967716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -667,3 +701,4 @@ SceneRoots:
   - {fileID: 138993173}
   - {fileID: 1153747581}
   - {fileID: 1319967716}
+  - {fileID: 119921286}

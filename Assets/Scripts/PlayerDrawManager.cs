@@ -9,6 +9,9 @@ public class PlayerDrawManager : MonoBehaviour
     public const float RESOLUTION = 0.02f;
     private PlayerLine _currentLine;
     private int lineNumber = 0;
+
+    public bool Active = true;
+
     void Start()
     {
 
@@ -17,6 +20,8 @@ public class PlayerDrawManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!Active)
+            return;
 
         Vector2 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonDown(0))

@@ -46,4 +46,9 @@ public class Line : MonoBehaviour
 
 
     }
+
+    public List<Vector2> GetPoints()
+    {
+        return _points;
+    }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DrawManager : MonoBehaviour
@@ -8,10 +9,15 @@ public class DrawManager : MonoBehaviour
     public const float RESOLUTION = 0.1f;
     private Line _currentLine;
     private int lineNumber = 0;
-    private float lastDrawTime = -0.5f; 
+    private float lastDrawTime = -0.5f;
+
+    public bool Active = true;
 
     void Update()
     {
+        if (!Active)
+            return;
+
         Vector2 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
 
         if (lineNumber < _lines.Length)
@@ -33,6 +39,7 @@ public class DrawManager : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
+            ClientSend.CreateLine(_currentLine);
             _currentLine = null;
         }
 
@@ -49,5 +56,20 @@ public class DrawManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void AddLine(List<Vector2> points)
+    {
+        Debug.Log(points[0]);
+        _currentLine = Instantiate(_linePrefab);
+        _currentLine.GetComponent<EdgeCollider2D>().enabled = true;
+        for (int i = 0; i < points.Count; i++)
+        {
+            _currentLine.SetPosition(points[i]);
+        }
+        _lines[lineNumber] = _currentLine;
+        lineNumber++;
+        lastDrawTime = Time.time;
+        _currentLine = null;
     }
 }
