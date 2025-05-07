@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ClientSend
@@ -37,6 +39,22 @@ public class ClientSend
         {
             packet.WriteInt(Client.Instance.ID);
             packet.WriteVector3(position);
+
+            SendTCPData(packet);
+        }
+    }
+
+    public static void CreateLine(PlayerLine line)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.CreateLine))
+        {
+            packet.WriteInt(Client.Instance.ID);
+
+            packet.WriteInt(line.GetPoints().Count);
+            for(int i = 0; i < line.GetPoints().Count; i++)
+            {
+                packet.WriteVector2(line.GetPoints()[i]);
+            }
 
             SendTCPData(packet);
         }

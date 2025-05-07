@@ -1,4 +1,5 @@
 ﻿using Server.Data;
+using Server.Game;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace Server
         public void Disconnect()
         {
             Console.WriteLine($"\"{Data.Username}\" (ID: {ID}) has disconnected");
+
+            Program.World.RemovePlayer(ID);
 
             TCP.Disconnect();
         }

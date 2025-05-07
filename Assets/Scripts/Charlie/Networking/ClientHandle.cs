@@ -52,4 +52,17 @@ public class ClientHandle
             Client.Instance.WorldManager.PositionOtherPlayer(pos);
         }
     }
+
+    public static void LineCreate(Packet packet)
+    {
+        List<Vector2> points = new List<Vector2>();
+
+        int count = packet.ReadInt();
+        for(int i = 0; i < count; i++)
+        {
+            points.Add(packet.ReadVector2());
+        }
+
+        Client.Instance.WorldManager.AddLine(points);
+    }
 }

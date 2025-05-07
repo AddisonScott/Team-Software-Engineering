@@ -15,10 +15,14 @@ namespace Server.Game
 
         private Dictionary<int, Player> m_PlayerMap;
 
+        private List<Line> m_Lines;
+        private Line m_CurrentLine;
+
         public World()
         {
             m_LevelIndex = 1;
             m_PlayerMap = new Dictionary<int, Player>();
+            m_Lines = new List<Line>();
         }
 
         /// <summary>
@@ -102,6 +106,44 @@ namespace Server.Game
         public Vector3 GetNextSpawnpoint()
         {
             return new Vector3(-3.0f, -1.0f, 0.0f);
+        }
+
+        public void StartNewLine()
+        {
+            m_CurrentLine = new Line();
+        }
+
+        public void StartNewLine(List<Vector2> points)
+        {
+            m_CurrentLine = new Line(points);
+        }
+
+        public void AddLinePoint(Vector2 point)
+        {
+            m_CurrentLine.Points.Add(point);
+        }
+
+        public void IncrementLineSegment()
+        {
+            m_CurrentLine.CurrentSegment++;
+        }
+
+        public Line GetCurrentLine()
+        {
+            return m_CurrentLine;
+        }
+
+        public int EndLine()
+        {
+            int index = m_Lines.Count;
+            m_Lines.Add(m_CurrentLine);
+            m_CurrentLine = null;
+            return index;
+        }
+
+        public Line GetLineFromIndex(int index)
+        {
+            return (m_Lines[index]);
         }
     }
 }

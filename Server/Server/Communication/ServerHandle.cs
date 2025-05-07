@@ -70,131 +70,26 @@ namespace Server
             ServerSend.UpdateOtherPlayer(clientID, newPosition);
         }
 
-        ///// <summary>
-        ///// Handles the incoming LevelReady packet from client
-        ///// </summary>
-        ///// <param name="fromClient">The ID of the client that send this packet</param>
-        ///// <param name="packet">The packet data itself</param>
-        //public static void LevelReady(int fromClient, Packet packet)
-        //{
-        //    int clientID = packet.ReadInt();
+        public static void CreateLine(int fromClient, Packet packet)
+        {
+            int clientID = packet.ReadInt();
 
-        //    if (fromClient != clientID)
-        //    {
-        //        Console.WriteLine($"\"{Server.Clients[clientID].Data.Username}\" (ID: {fromClient}) has assumed the wrong client ID ({clientID})!");
-        //        return;
-        //    }
+            if (fromClient != clientID)
+            {
+                Console.WriteLine($"\"{Server.Clients[clientID].Data.Username}\" (ID: {fromClient}) has assumed the wrong client ID ({clientID})!");
+                return;
+            }
 
-        //    if(LevelManager.GetLevel(Program.World.GetCurrentLevel()).GetObjects().Count == 0)
-        //    {
-        //        ServerSend.EndLevel(clientID, Program.World.GetCurrentLevel());
-        //    }
-        //    else
-        //    {
-        //        ServerSend.SendLevelObject(clientID, 0);
-        //    }
-        //}
+            int count = packet.ReadInt();
+            Program.World.StartNewLine();
 
-        ///// <summary>
-        ///// Handles the incoming LevelReceived packet from client
-        ///// </summary>
-        ///// <param name="fromClient">The ID of the client that send this packet</param>
-        ///// <param name="packet">The packet data itself</param>
-        //public static void LevelReceived(int fromClient, Packet packet)
-        //{
-        //    int clientID = packet.ReadInt();
+            for(int i = 0; i < count; i++)
+            {
+                Program.World.AddLinePoint(packet.ReadVector2());
+            }
 
-        //    if (fromClient != clientID)
-        //    {
-        //        Console.WriteLine($"\"{Server.Clients[clientID].Data.Username}\" (ID: {fromClient}) has assumed the wrong client ID ({clientID})!");
-        //        return;
-        //    }
-
-        //    Console.WriteLine($"Level fully sent to player {clientID}!");
-        //}
-
-        ///// <summary>
-        ///// Handles the incoming LevelObjectReceived packet from client
-        ///// </summary>
-        ///// <param name="fromClient">The ID of the client that send this packet</param>
-        ///// <param name="packet">The packet data itself</param>
-        //public static void LevelObjectReceived(int fromClient, Packet packet)
-        //{
-        //    int clientID = packet.ReadInt();
-
-        //    if (fromClient != clientID)
-        //    {
-        //        Console.WriteLine($"\"{Server.Clients[clientID].Data.Username}\" (ID: {fromClient}) has assumed the wrong client ID ({clientID})!");
-        //        return;
-        //    }
-
-        //    int objID = packet.ReadInt();
-
-        //    if (objID == LevelManager.GetLevel(Program.World.GetCurrentLevel()).GetObjects().Count - 1)
-        //    {
-        //        ServerSend.SendPlayer(clientID);
-        //    }
-        //    else
-        //    {
-        //        ServerSend.SendLevelObject(clientID, objID + 1);
-        //    }
-        //}
-
-        ///// <summary>
-        ///// Handles the incoming PlayerReceived packet from client
-        ///// </summary>
-        ///// <param name="fromClient">The ID of the client that send this packet</param>
-        ///// <param name="packet">The packet data itself</param>
-        //public static void PlayerReceived(int fromClient, Packet packet)
-        //{
-        //    int clientID = packet.ReadInt();
-
-        //    if (fromClient != clientID)
-        //    {
-        //        Console.WriteLine($"\"{Server.Clients[clientID].Data.Username}\" (ID: {fromClient}) has assumed the wrong client ID ({clientID})!");
-        //        return;
-        //    }
-
-        //    if (Program.World.GetPlayerCount() == 2)
-        //    {
-        //        ServerSend.SendOtherPlayer(clientID, 1);
-        //    }
-        //    else
-        //    {
-        //        ServerSend.EndLevel(clientID, Program.World.GetCurrentLevel());
-        //    }
-        //}
-
-        ///// <summary>
-        ///// Handles the incoming OtherPlayerReceived packet from client
-        ///// </summary>
-        ///// <param name="fromClient">The ID of the client that send this packet</param>
-        ///// <param name="packet">The packet data itself</param>
-        //public static void OtherPlayerReceived(int fromClient, Packet packet)
-        //{
-        //    int clientID = packet.ReadInt();
-
-        //    if (fromClient != clientID)
-        //    {
-        //        Console.WriteLine($"\"{Server.Clients[clientID].Data.Username}\" (ID: {fromClient}) has assumed the wrong client ID ({clientID})!");
-        //        return;
-        //    }
-
-        //    ServerSend.EndLevel(clientID, Program.World.GetCurrentLevel());
-        //}
-
-        //public static void UpdatePlayerPosition(int fromClient, Packet packet)
-        //{
-        //    int clientID = packet.ReadInt();
-
-        //    if (fromClient != clientID)
-        //    {
-        //        Console.WriteLine($"\"{Server.Clients[clientID].Data.Username}\" (ID: {fromClient}) has assumed the wrong client ID ({clientID})!");
-        //        return;
-        //    }
-
-        //    Vector3 position = packet.ReadVector3();
-        //    ServerSend.SendPlayerPosition(clientID, position);
-        //}
+            int lineIndex = Program.World.EndLine();
+            ServerSend.LineCreate(clientID, lineIndex);
+        }
     }
 }

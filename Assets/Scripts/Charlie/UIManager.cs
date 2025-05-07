@@ -26,4 +26,12 @@ public class UIManager : MonoBehaviour
 
         m_Client.Connect(ip, username);
     }
+
+    public void QuickConnect()
+    {
+        string username = "Player";
+        string ip = "127.0.0.1";
+
+        m_Client.Connect(ip, username);
+    }
 }

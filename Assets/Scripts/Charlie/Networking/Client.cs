@@ -17,8 +17,8 @@ public class Client : MonoBehaviour
     public int ID = 0;
     public TCPConnection TCP;
 
-    public WorldManager WorldManager;
-    public bool FirstPlayer;
+    [HideInInspector] public WorldManager WorldManager;
+    [HideInInspector] public bool FirstPlayer;
 
     private bool m_IsConnected = false;
 
@@ -78,6 +78,7 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.SendOtherPlayerPosition, ClientHandle.SendOtherPlayerPosition },
             { (int)ServerPackets.PlayerJoined, ClientHandle.PlayerJoined },
             { (int)ServerPackets.UpdateOtherPlayer, ClientHandle.UpdateOtherPlayer },
+            { (int)ServerPackets.LineCreate, ClientHandle.LineCreate },
         };
         Debug.Log("Initialized packets.");
     }

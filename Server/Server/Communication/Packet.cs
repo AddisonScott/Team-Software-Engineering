@@ -16,6 +16,7 @@ namespace Server
         SendOtherPlayerPosition = 4,
         PlayerJoined = 5,
         UpdateOtherPlayer = 6,
+        LineCreate = 7,
     }
 
     public enum ClientPackets
@@ -23,6 +24,7 @@ namespace Server
         WelcomeReceived = 1,
         LevelReceived = 2,
         PlayerSync = 3,
+        CreateLine = 4,
     }
 
     class Packet : IDisposable

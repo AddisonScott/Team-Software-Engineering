@@ -34,7 +34,7 @@ public class PlayerDrawManager : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            //GetComponent<LineSync>().SyncLine(_currentLine);
+            ClientSend.CreateLine(_currentLine);
             _currentLine = null;
         }
 
@@ -51,5 +51,17 @@ public class PlayerDrawManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void AddLine(List<Vector2> points)
+    {
+        // Use a new object instead of _currentLine as _currentLine may be currently being used by the Update loop
+        PlayerLine line = Instantiate(_linePrefab);
+        for (int i = 0; i < points.Count; i++)
+        {
+            line.SetPosition(points[i]);
+        }
+        _lines.Add(line);
+        lineNumber++;
     }
 }

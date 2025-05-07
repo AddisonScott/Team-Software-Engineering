@@ -25,4 +25,9 @@ public class PlayerLine : MonoBehaviour
         if (_renderer.positionCount == 0) return true; //always true for first point
         return Vector2.Distance(_renderer.GetPosition(_renderer.positionCount - 1), pos) > PlayerDrawManager.RESOLUTION; //checks distance between last point
     }
+
+    public List<Vector2> GetPoints()
+    {
+        return _points;
+    }
 }
